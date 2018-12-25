@@ -1,7 +1,6 @@
 // tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs/Rx';
 
-
 export abstract class BaseService {
     constructor() { }
 

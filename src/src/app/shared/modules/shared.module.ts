@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { MyFocus } from '../../directives/focus.directive';
 import {SpinnerComponent} from '../../spinner/spinner.component';
 
-
 @NgModule({
   imports:      [CommonModule],
   declarations: [MyFocus, SpinnerComponent],
