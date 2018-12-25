@@ -4,10 +4,12 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { UserRegistration } from '../models/user.registration.interface';
 import { ConfigService } from '../utils/config.service';
 
-import {BaseService} from "./base.service";
+import {BaseService} from './base.service';
 
+// tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs/Rx';
-import { BehaviorSubject } from 'rxjs/Rx'; 
+// tslint:disable-next-line:import-blacklist
+import { BehaviorSubject } from 'rxjs/Rx';
 
 // Add the RxJS Observable operators we need in this app.
 import '../../rxjs-operators';
@@ -16,7 +18,7 @@ import '../../rxjs-operators';
 
 export class UserService extends BaseService {
 
-  baseUrl: string = '';
+  baseUrl = '';
 
   // Observable navItem source
   private _authNavStatusSource = new BehaviorSubject<boolean>(false);
@@ -34,24 +36,24 @@ export class UserService extends BaseService {
     this.baseUrl = configService.getApiURI();
   }
 
-    register(email: string, password: string, firstName: string, lastName: string,location: string): Observable<UserRegistration> {
-    let body = JSON.stringify({ email, password, firstName, lastName,location });
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    register(email: string, password: string, firstName: string, lastName: string, location: string): Observable<UserRegistration> {
+    const body = JSON.stringify({ email, password, firstName, lastName, location });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.baseUrl + "/accounts", body, options)
+    return this.http.post(this.baseUrl + '/accounts', body, options)
       .map(res => true)
       .catch(this.handleError);
-  }  
+  }
 
    login(userName, password) {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
     return this.http
       .post(
       this.baseUrl + '/auth/login',
-      JSON.stringify({ userName, password }),{ headers }
+      JSON.stringify({ userName, password }), { headers }
       )
       .map(res => res.json())
       .map(res => {
@@ -73,10 +75,10 @@ export class UserService extends BaseService {
     return this.loggedIn;
   }
 
-  facebookLogin(accessToken:string) {
-    let headers = new Headers();
+  facebookLogin(accessToken: string) {
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    let body = JSON.stringify({ accessToken });  
+    const body = JSON.stringify({ accessToken });
     return this.http
       .post(
       this.baseUrl + '/externalauth/facebook', body, { headers })
